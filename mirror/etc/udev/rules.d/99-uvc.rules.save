@@ -1,0 +1,2 @@
+#UVC cameras
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", SYSFS{idVendor}=="046d", SYSFS{idProduct}=="080c", MODE="0666"

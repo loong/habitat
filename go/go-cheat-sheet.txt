@@ -1,0 +1,6 @@
+
+
+# Emacs
+http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/
+
+gofmt - reformats code into One True Go Style Coding Standard

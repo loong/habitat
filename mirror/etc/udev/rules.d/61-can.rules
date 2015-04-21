@@ -1,0 +1,9 @@
+# 8devices USB2Can
+ATTR{idVendor}=="0483", ACTION=="add", RUN+="/home/long/.emacs.d/scripts/can_start.sh"
+
+ATTR{idVendor}=="0483", ACTION=="remove", RUN+="/home/long/.emacs.d/scripts/can_stop.sh"
+
+#Peak PCan
+ATTR{idVendor}=="0c72", ACTION=="add", RUN+="/home/long/.emacs.d/scripts/can_start.sh"
+
+ATTR{idVendor}=="0c72", ACTION=="remove", RUN+="/home/long/.emacs.d/scripts/can_stop.sh"
