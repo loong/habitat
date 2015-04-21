@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#sudo add-apt-repository universe
+#sudo apt-get update
+
+sudo apt-get install build-essential cmake libboost-all-dev
+sudo apt-get install python-dev
+sudo apt-get install gitcore
+sudo apt-get install emacs doxymacs
+
+# tools
+sudo apt-get install guake terminator
+
+# mc and can
+sudo apt-get install avr-libc avrdude
+sudo apt-get install can-utils
+
+# go lang
+sudo apt-get install golang-go
+sudo apt-get install golang-go.tools
+
+# nautilus
+sudo apt-get install nautilus-open-terminal nautilus-actions 
+sudo apt-get install fsarchiver rsync
+
+# vlc
+sudo add-apt-repository ppa:videolan/stable-daily
+sudo apt-get update
+sudo apt-get install vlc
+
+# chrome
+sudo apt-get install libxss1 libappindicator1 libindicator7
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+
+sudo apt-get install cheese shutter
+sudo apt-get install cowsay sl
+sudo apt-get install htop lynx
+
+sudo apt-get install dropbox
+sudo apt-get install filezilla
+sudo apt-get install command-not-found
+
+# battery life
+sudo apt-get install acpitool

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Installing trash-cli..."
+cd trash-cli
+git pull
+sudo python setup.py install
