@@ -130,18 +130,8 @@ whatis $(ls /bin | shuf -n 1)
 # Habitat
 source ~/habitat/go/go.bash
 
-alias backup='~/.emacs.d/backup'
-
-# alias rm='echo "rm is not save, please youse trash-put or rmt"'
-alias rmt='trash-put'
-
-
 alias steve='cd /home/long/Workspaces'
-alias steveinstall='sudo apt-get install '
 
-alias stevedroid='ssh odroid@odroid.local'
-alias stevesync='localtime=`date +%s` && ssh root@odroid date +%s -s @$localtime && echo `date +%s`'
-alias steveremote='ROS_MASTER_URI=http://192.168.11.15:11311 && ROS_IP=192.168.11.22'
 alias omaster='export ROS_MASTER_URI=http://odroid:11311 && ROS_IP=10.10.0.127'
 
 alias stevemount2='sshfs -o workaround=rename ugh7@webhost1.ust.hk:/home/ugh7/public_html/ /home/long/Desktop/sftp2/'
@@ -157,59 +147,10 @@ alias please='sudo'
 alias ros='/home/long/Workspaces/rov2015/ros_rov && source devel/setup.bash'
 alias roscm='ros && catkin_make'
 
-
 alias FTL='cd ~/Workbase/Games/FTL && ./FTL'
 
 alias sshdroid='ssh odroid@10.10.0.1'
 alias sshodroid='ssh odroid@10.10.0.1'
-
-function bck() { cp "$1" "$1.bck" ;}
-
-function extract {
- if [ -z "$1" ]; then
-    # display usage if no parameters given
-    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
- else
-    if [ -f $1 ] ; then
-	# NAME=${1%.*}
-	# echo $NAME
-        # mkdir $NAME && cd $NAME
-        case $1 in
-          *.tar.bz2)   tar xvjf ./$1    ;;
-          *.tar.gz)    tar xvzf ./$1    ;;
-          *.tar.xz)    tar xvJf ./$1    ;;
-          *.lzma)      unlzma ./$1      ;;
-          *.bz2)       bunzip2 ./$1     ;;
-          *.rar)       unrar x -ad ./$1 ;;
-          *.gz)        gunzip ./$1      ;;
-          *.tar)       tar xvf ./$1     ;;
-          *.tbz2)      tar xvjf ./$1    ;;
-          *.tgz)       tar xvzf ./$1    ;;
-          *.zip)       unzip ./$1       ;;
-          *.Z)         uncompress ./$1  ;;
-          *.7z)        7z x ./$1        ;;
-          *.xz)        unxz ./$1        ;;
-          *.exe)       cabextract ./$1  ;;
-          *)           echo "extract: '$1' - unknown archive method" ;;
-        esac
-    else
-        echo "$1 - file does not exist"
-    fi
-fi
-}
-
-
-function histo() {
-    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n15
-}
-
-function batmon() {
-    while true; do
-	acpitool -B | grep "Present rate";
-	sleep 1;
-    done
-}
-
 
 DEBFULLNAME="Long Hoang" 
 DEBEMAIL="long@mindworker.de" 
