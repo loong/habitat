@@ -22,6 +22,18 @@
 ;; open ffap (find file at point) Keybindings
 (ffap-bindings)
 
+;; disable toolbar and menubar
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+
+;; show which function currently
+(which-function-mode 1)
+
+;; make it hard for me in order to learn proper keys
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+(require 'no-easy-keys)
+(no-easy-keys 1)
+
 ;; ----------------------------------------------------------------------
 ;; doxymacs
 ;; ----------------------------------------------------------------------
@@ -128,11 +140,10 @@
 ;; go todo
 ;;  - go oracle
 
-;; make it hard for me in order to learn proper keys
-(add-to-list 'load-path
-	     "~/.emacs.d/plugins/")
-(require 'no-easy-keys)
-(no-easy-keys 1)
+
+;; flymake mode which shows errors while coding
+(eval-after-load "go-mode"
+  '(require 'flymake-go))
 
 ;; Autocomplete
 (add-to-list 'load-path "~/.emacs.d/")
