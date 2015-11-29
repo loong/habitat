@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: view:
+# key: view:
+# binding: direct-keybinding
+# --
+view := View{
+	Page:    ${1:0},
+	HasNext: ${2:false},
+	Cards: []*cards.Card{
+		${3:c.Factory.}$0,
+	},
+}

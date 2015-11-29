@@ -114,21 +114,11 @@ if ! shopt -oq posix; then
 fi
 source /opt/ros/indigo/setup.bash
 
-## Setup linux brew
-export LINUXBREWHOME=$HOME/Workbase/linuxbrew
-export PATH=$LINUXBREWHOME/bin:$PATH
-export MANPATH=$LINUXBREWHOME/man:$MANPATH
-export PKG_CONFIG_PATH=$LINUXBREWHOME/lib64/pkgconfig:$LINUXBREWHOME/lib/pkgconfig:$PKG_CONFIG_PATH
-export LD_LIBRARY_PATH=$LINUXBREWHOME/lib64:$LINUXBREWHOME/lib:$LD_LIBRARY_PATH
-
 ##########################################
 #  Long 
 ##########################################
-cowsay -fdragon "I'm a stegosaurus!"
-whatis $(ls /bin | shuf -n 1)
 
-# Habitat
-source ~/habitat/go/go.bash
+cowsay -fdragon "I'm a stegosaurus!"
 
 alias steve='cd /home/long/Workspaces'
 
@@ -144,7 +134,7 @@ alias stevepull='cd /home/long/Workspaces/hall7 && scp -r ugh7@webhost1.ust.hk:/
 #alias sudo='echo "what is the magical word?"'
 alias please='sudo'
 
-alias ros='/home/long/Workspaces/rov2015/ros_rov && source devel/setup.bash'
+alias ros='cd /home/long/Workspaces/rov2015/ros_rov && source devel/setup.bash'
 alias roscm='ros && catkin_make'
 
 alias FTL='cd ~/Workbase/Games/FTL && ./FTL'
@@ -154,3 +144,28 @@ alias sshodroid='ssh odroid@10.10.0.1'
 
 DEBFULLNAME="Long Hoang" 
 DEBEMAIL="long@mindworker.de" 
+
+#GVM
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# Go ENV
+export GOPATH=~/Workspaces/go
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+### Added by the Heroku Toolbelt
+export PATH=/usr/local/heroku/bin:$PATH
+
+export NVM_DIR="/home/long/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Android / Cordova / Ionic
+export PATH=$PATH:/opt/android-studio/bin
+export ANDROID_HOME=/home/long/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+# Cross Compile
+export PATH=${PATH}:$HOME/Workbase/gcc-arm-none-eabi-4_8-2014q2/bin
+
+export PATH=/usr/local/node/bin:${PATH}:/usr/local/node/bin
+export REACT_EDITOR=emacs

@@ -1,2 +1,2 @@
-#UVC cameras
+# Logitech cameras
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", MODE="0666"

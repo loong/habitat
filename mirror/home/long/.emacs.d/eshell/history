@@ -1,17 +1,3 @@
-git status
-git add library.scm 
-git commit -m "fixed equal?"
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
-./main 
 ./main 
 ./main 
 ./main 
@@ -126,3 +112,17 @@ candump can0
 ls ~/habitat/go/go-mode.el/
 em ~/habitat/go/go-mode.el/go-mode-load.el
 emacs ~/habitat/go/go-mode.el/go-mode-load.el
+ls
+cd ..
+ls
+sweep
+ls
+cd content/
+ls
+cd code/
+ls
+cd ..
+mkdir text
+cd text/
+ls
+touch t1.txt

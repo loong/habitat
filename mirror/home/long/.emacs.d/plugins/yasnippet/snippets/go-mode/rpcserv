@@ -1,0 +1,16 @@
+# -*- mode:snippet -*-
+# name: RPC Service
+# key: rpcserv
+# --
+type $2Args struct {
+
+}
+
+type $2Reply struct {
+
+}
+
+func (h *$1Service) $2(r *http.Request, args *$2Args, reply *$2Reply) error {
+  $0
+  return nil
+}
