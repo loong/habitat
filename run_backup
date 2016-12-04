@@ -11,7 +11,7 @@ echo
 echo "--------------------------------------------------"
 echo "Create Local Mirror Backup"
 echo "--------------------------------------------------"
-bck ~/.bash_aliases              "bash_aliases"
+bck ~/.aliases.sh                  "bash_aliases"
 # mir ~/.emacs.d/"*"               ".emacs.d"
 
 echo 
@@ -19,4 +19,4 @@ echo "--------------------------------------------------"
 echo "Clean up"
 echo "--------------------------------------------------"
 find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v;
-rm mirror/home/$USER/.emacs.d/session.*
+# rm mirror/home/$USER/.emacs.d/session.*
