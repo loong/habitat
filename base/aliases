@@ -127,6 +127,8 @@ if [[ "$unamestr" == 'Linux' ]]; then
     alias lightterm='~/habitat/base/themes/one-light'
     alias matterm='~/habitat/base/themes/material'
 
+    alias rewifi='nmcli nm wifi off && nmcli nm wifi on'
+
 # Mac OS X
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
