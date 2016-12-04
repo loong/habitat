@@ -11,7 +11,7 @@ echo
 echo "--------------------------------------------------"
 echo "Create Local Mirror Backup"
 echo "--------------------------------------------------"
-bck ~/.aliases.sh                  "bash_aliases"
+# bck ~/.aliases                     "aliases"
 # mir ~/.emacs.d/"*"               ".emacs.d"
 
 echo 

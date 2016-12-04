@@ -50,6 +50,8 @@ alias gs='git status'
 alias gc='git commit -m'
 alias gp='git push' 
 alias g.='git add .'
+alias gwip='git commit -m WIP'
+alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 
 ###########################################################################
 # Utilities
@@ -116,7 +118,6 @@ alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups pu
 ###
 
 unamestr=`uname`
-echo $unamestr
 
 # Linux
 if [[ "$unamestr" == 'Linux' ]]; then
