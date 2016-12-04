@@ -123,6 +123,9 @@ unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
     alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
 
+    alias lightterm='~/habitat/base/themes/one-light'
+    alias matterm='~/habitat/base/themes/material'
+
 # Mac OS X
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
