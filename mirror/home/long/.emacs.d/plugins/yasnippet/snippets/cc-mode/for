@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: for
-# key: for
-# --
-for (int i = ${1:0}; i < ${2:N}; ++i) {
-    $0
-}

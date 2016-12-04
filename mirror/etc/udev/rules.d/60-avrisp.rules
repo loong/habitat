@@ -1,2 +1,0 @@
-#fake AVRISP
-ATTR{idVendor}=="03eb", MODE="666", GROUP="dialout"

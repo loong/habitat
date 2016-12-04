@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: ifndef
-# key: ifndef
-# --
-#ifndef ${1:`(upcase (file-name-sans-extension (file-name-nondirectory (buffer-file-name))))`}_HPP
-#define ${1:$(yas/substr yas-text "[^: ]*")}_HPP
-$0
-#endif

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+USER=long
+
+function bck {
+    echo "Backing up $2..."
+    cp -r $1 bck/
+}
+
+echo
+echo "--------------------------------------------------"
+echo "Create Local Mirror Backup"
+echo "--------------------------------------------------"
+bck ~/.bash_aliases              "bash_aliases"
+# mir ~/.emacs.d/"*"               ".emacs.d"
+
+echo 
+echo "--------------------------------------------------"
+echo "Clean up"
+echo "--------------------------------------------------"
+find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v;
+rm mirror/home/$USER/.emacs.d/session.*
