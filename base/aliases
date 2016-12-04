@@ -22,6 +22,7 @@ alias cslab2="ssh lhoang@csl2wk39.cse.ust.hk"
 alias magic='emacs -nw ~/habitat/base/aliases'
 alias zmagic='emacs -nw ~/.zshrc'
 alias imagic='emacs -nw ~/.config/i3/config'
+alias smagic='emacs -nw ~/.i3status.conf'
 alias tmagic='emacs -nw ~/.tmux.conf'
 alias emagic='emacs -nw ~/.emacs.d/init.el'
 alias hmagic='emacs -nw /etc/hosts'

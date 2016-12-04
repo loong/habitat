@@ -2,7 +2,8 @@
 
 USER=long
 HOME=/home/$USER
-declare -A map=( ["i3config"]="${HOME}/.config/i3/config" )
+declare -A map=( ["i3config"]="${HOME}/.config/i3/config" \
+    ["i3status.conf"]="${HOME}/.i3status.conf")
 
 function bck {
     echo "Backing up $2..."
@@ -30,5 +31,6 @@ echo "Clean up"
 echo "--------------------------------------------------"
 find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm
 # rm mirror/home/$USER/.emacs.d/session.*
+
 echo ""
 echo "DONE!"
