@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ###########################################################################
 #
 #   @autor Long Hoang <long@mindworker.de>
@@ -10,11 +12,14 @@
 # Workspaces
 ###
 
+alias cslab="ssh lhoang@143.89.236.38"
+alias cslab2="ssh lhoang@csl2wk39.cse.ust.hk"
+
 ###########################################################################
 # Frequently used config files
 ###
 
-alias magic='emacs -nw ~/.aliases.sh'
+alias magic='emacs -nw ~/habitat/base/aliases'
 alias zmagic='emacs -nw ~/.zshrc'
 alias imagic='emacs -nw ~/.config/i3/config'
 alias tmagic='emacs -nw ~/.tmux.conf'
@@ -101,13 +106,25 @@ function curlj() {
     curl "$@" | python -m json.tool
 }
 
+# Heroku
+alias hlogs='heroku logs'
+alias hpg='heroku pg:psql'
+alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups public-url`'
+
 ###########################################################################
 # Platform specific
 ###
 
 unamestr=`uname`
+echo $unamestr
+
+# Linux
 if [[ "$unamestr" == 'Linux' ]]; then
-   alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
-   echo 'Is MAC'
+    alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
+
+# Mac OS X
+elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
+    alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
+    alias subl='open -a "Sublime Text 2"'
+    alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
 fi
