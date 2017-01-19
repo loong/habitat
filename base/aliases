@@ -14,6 +14,7 @@
 
 alias cslab="ssh lhoang@143.89.236.38"
 alias cslab2="ssh lhoang@csl2wk39.cse.ust.hk"
+alias gows='cd ${GOPATH}/src/github.com'
 
 ###########################################################################
 # Frequently used config files
@@ -51,6 +52,7 @@ alias gs='git status'
 alias gc='git commit -m'
 alias gp='git push' 
 alias g.='git add .'
+alias gmod="git ls-files --modified | xargs git add"
 alias gwip='git commit -m WIP'
 alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 
