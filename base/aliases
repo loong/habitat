@@ -11,10 +11,14 @@
 ###########################################################################
 # Workspaces
 ###
+alias rav='cd ${GOPATH}/src/github.com/unravelin'
+alias infra='cd $GOPATH/src/github.com/unravelin/infrastructure'
 
-alias cslab="ssh lhoang@143.89.236.38"
-alias cslab2="ssh lhoang@csl2wk39.cse.ust.hk"
+alias idash='cd $GOPATH/src/github.com/unravelin/core/client-dashboard-service'
+alias ifront='cd ~/js/dashboard-internal-service'
+
 alias gows='cd ${GOPATH}/src/github.com'
+alias gomind='cd ${GOPATH}/src/github.com/mindworker'
 
 ###########################################################################
 # Frequently used config files
@@ -39,6 +43,7 @@ alias ...='cd ../../../'
 alias j='jobs -l'
 alias em='emacs -nw'
 alias sem='sudo emacs -nw'
+alias v='vim -O'
 alias chmox='chmod +x'
 alias schmox='sudo chmod +x'
 alias df='df -h'
@@ -52,9 +57,17 @@ alias gs='git status'
 alias gc='git commit -m'
 alias gp='git push' 
 alias g.='git add .'
+
 alias gmod="git ls-files --modified | xargs git add"
 alias gwip='git commit -m WIP'
 alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
+
+alias 'git fame'='git blame'
+
+# docker shortcuts
+alias dstatus='docker-compose exec dev supervisorctl status'
+alias dlog='docker-compose logs dev'
+alias dstopall='docker stop $(docker ps -aq)'
 
 ###########################################################################
 # Utilities
@@ -135,5 +148,6 @@ if [[ "$unamestr" == 'Linux' ]]; then
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
     alias subl='open -a "Sublime Text 2"'
+    alias md='open -a MacDown'
     alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
 fi
