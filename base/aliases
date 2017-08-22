@@ -57,12 +57,19 @@ alias gs='git status'
 alias gc='git commit -m'
 alias gp='git push' 
 alias g.='git add .'
+alias gd='git diff'
 
 alias gmod="git ls-files --modified | xargs git add"
 alias gwip='git commit -m WIP'
 alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 
-alias 'git fame'='git blame'
+# check if git name and email is set, if not set it to default
+if [[ ! $(git config --global user.email) ]]; then
+    echo "Git name and email conf not set, set them automatically"
+    git config --global user.email "long@mindworker.de"
+    git config --global user.name "Long Hoang"
+    git config --global core.editor "emacs -nw"
+fi
 
 # docker shortcuts
 alias dstatus='docker-compose exec dev supervisorctl status'
