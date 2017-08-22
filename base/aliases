@@ -20,6 +20,8 @@ alias ifront='cd ~/js/dashboard-internal-service'
 alias gows='cd ${GOPATH}/src/github.com'
 alias gomind='cd ${GOPATH}/src/github.com/mindworker'
 
+alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
+
 ###########################################################################
 # Frequently used config files
 ###
@@ -72,6 +74,8 @@ if [[ ! $(git config --global user.email) ]]; then
 fi
 
 # docker shortcuts
+alias dp='docker ps'
+alias dpa='docker ps -a'
 alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
