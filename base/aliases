@@ -80,6 +80,12 @@ alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
 
+# python shortcuts
+alias acti='virtualenv venv && source venv/bin/activate'
+alias act='source venv/bin/activate'
+alias pipr='pip install -r requirements.txt'
+alias pipi='pip install'
+
 ###########################################################################
 # Utilities
 ###
@@ -158,7 +164,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
 # Mac OS X
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
-    alias subl='open -a "Sublime Text 2"'
+    alias subl='open -a "Sublime Text"'
     alias md='open -a MacDown'
     alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
 fi
