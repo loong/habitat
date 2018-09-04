@@ -1,23 +1,26 @@
-(load-library "url-handlers")
-
-(setq default-directory "/home/long/Workspaces/")
-;; (setq inhibit-startup-message t)
-
-;;; I prefer cmd key for meta
-(setq mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none)
-
-;; use package and add MELPA
-;; Package managers
+(require 'cl-lib)
 (require 'package)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize) 
-;; (package-refresh-contents) ;; uncomment if needed for new packages
- (setq mac-option-modifier 'super)
- (setq mac-command-modifier 'meta)
- 
+(package-initialize)
+
+(defvar my-packages
+  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-google-cpplint flymake-go expand-region dash company)
+  "A list of packages to ensure are installed at launch.")
+
+(defun my-packages-installed-p ()
+  (cl-loop for p in my-packages
+           when (not (package-installed-p p)) do (cl-return nil)
+           finally (cl-return t)))
+
+(unless (my-packages-installed-p)
+  ;; check for new packages (package versions)
+  (package-refresh-contents)
+  ;; install the missing packages
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
 ;; for bashrc aliases
 (setq shell-file-name "zsh")
 (setq shell-command-switch "-ic")
@@ -39,37 +42,6 @@
 ;; show which function currently
 (which-function-mode 1)
 
-;; make it hard for me in order to learn proper keys
-;; (add-to-list 'load-path "~/.emacs.d/plugins/")
-;; (require 'no-easy-keys)
-;; (no-easy-keys 1)
-
-;; ----------------------------------------------------------------------
-;; doxymacs
-;; ----------------------------------------------------------------------
-; (add-hook 'c-mode-common-hook 'doxymacs-mode)
-; (defun my-doxymacs-font-lock-hook ()
-;   (if (or (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode)) (eq major-mode 'go-mode))
-;       (doxymacs-font-lock)))
-; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
-
-; (setq doxymacs-file-comment-template 
-;  '(
-;    "/**********************************************************************" > n
-;    " *" > n
-;    " * " (doxymacs-doxygen-command-char) "file   "
-;    (if (buffer-file-name)
-;        (file-name-nondirectory (buffer-file-name))
-;      "") > n
-;      " * " (doxymacs-doxygen-command-char) "author Long Hoang <long@mindworker.de>" > n
-;      " * " > n
-;      " * " (doxymacs-doxygen-command-char) "brief  " > n
-;      " * " > n
-;      " **********************************************************************/" > n > n
-;      ))
-
-;; ----------------------------------------------------------------------
-
 ;; open two files vertical on startup not horizontal
 (defun 2-windows-vertical-to-horizontal ()
   (let ((buffers (mapcar 'window-buffer (window-list))))
@@ -79,14 +51,10 @@
 (add-hook 'emacs-startup-hook '2-windows-vertical-to-horizontal)
 
 ;; yasnippet
-(add-to-list 'load-path
-	     "~/.emacs.d/plugins/yasnippet")
 (require 'yasnippet)
 (yas-global-mode 1)
 
 ;; web mode
-(add-to-list 'load-path
-	     "~/.emacs.d/plugins/web-mode")
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
@@ -108,33 +76,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; golang!
-
-;; go mode
-;;(add-to-list 'load-path "~/.emacs.d/plugins/go-mode.el/")
-;;(require 'go-mode-autoloads)
-
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(when window-system (set-exec-path-from-shell-PATH))
-
-(defun my-go-mode-hook ()
-  ; Call Gofmt before saving                                                    
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  ; Godef jump key binding                                                      
-  (local-set-key (kbd "M-.") 'godef-jump))
-(add-hook 'go-mode-hook 'my-go-mode-hook)
-;; tab size for go
-(defun my-go-mode-hook () 
-  (add-hook 'before-save-hook 'gofmt-before-save) 
-  (setq tab-width 4 indent-tabs-mode 1)) 
-(add-hook 'go-mode-hook 'my-go-mode-hook) 
+(require 'go-mode)
+(require 'golint)
+(require 'flymake-go)
+(require 'go-autocomplete)
+(require 'auto-complete-config)
 
 (defun my-go-mode-hook ()
   ;; Use goimports instead of go-fmt
@@ -149,45 +95,25 @@
   (local-set-key (kbd "M-.") 'godef-jump))
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-;; golint
-(add-to-list 'load-path "/Users/long/Workspaces/go/src/github.com/golang/lint/misc/emacs")
-(require 'golint)
+;; Typescript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
 
-;; go todo
-;;  - go oracle
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
 
-
-;; flymake mode which shows errors while coding
-(eval-after-load "go-mode"
-  '(require 'flymake-go))
-
-;; Autocomplete
-(add-to-list 'load-path "~/.emacs.d/go")
-(add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'go-autocomplete)
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/lisp/ac-dict")
-(ac-config-default)
-
-;; go-eldoc shows function header
-(add-hook 'go-mode-hook 'go-eldoc-setup)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (wakatime-mode solidity-mode web-mode js2-mode jsx-mode yasnippet go-eldoc flymake-go)))
- '(wakatime-cli-path "/usr/local/bin/wakatime")
- '(wakatime-python-bin "/usr/local/bin/python")
- '(xterm-mouse-mode t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; Aliases
 (defalias 'g 'goto-line)
@@ -200,7 +126,21 @@
       (interactive)
       (set-buffer-file-coding-system 'iso-latin-1-unix t))
 
-;; sol mode
-(add-to-list 'load-path
-	     "~/.emacs.d/plugins")
-(require 'solidity-mode)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+ '(package-selected-packages
+   (quote
+    (expand-region flymake-go flymake-google-cpplint go-autocomplete go-mode golint web-mode yasnippet-snippets markdown-mode sass-mode rainbow-mode solarized-theme volatile-highlights yaml-mode zenburn-theme tide))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
