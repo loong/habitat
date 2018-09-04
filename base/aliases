@@ -11,12 +11,6 @@
 ###########################################################################
 # Workspaces
 ###
-alias rav='cd ${GOPATH}/src/github.com/unravelin'
-alias infra='cd $GOPATH/src/github.com/unravelin/infrastructure'
-
-alias idash='cd $GOPATH/src/github.com/unravelin/core/client-dashboard-service'
-alias ifront='cd ~/js/dashboard-internal-service'
-
 alias gows='cd ${GOPATH}/src/github.com'
 alias gomind='cd ${GOPATH}/src/github.com/mindworker'
 
