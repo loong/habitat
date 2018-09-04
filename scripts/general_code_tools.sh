@@ -1,3 +1,12 @@
 #!/bin/bash
 
-brew install tmux the_silver_searcher trash htop
+unamestr=`uname`
+
+# Linux, assuming it will be apt-get based system
+if [[ "$unamestr" == 'Linux' ]]; then
+    sudo apt-get install tmux htop trash-cli git
+    
+# Mac OS X
+elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
+    brew install tmux the_silver_searcher trash htop git
+fi
