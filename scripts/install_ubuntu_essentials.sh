@@ -41,7 +41,7 @@ function install_apt_gets {
     fi
 
     sudo apt-get update
-    sudo apt-get install -y git zsh emacs24-nox tmux htop silversearcher-ag
+    sudo apt-get install -y git zsh emacs24-nox tmux htop silversearcher-ag trash-cli
 
     mkdir -p ~/.longh
     touch ~/.longh/.aptget.locks
@@ -57,7 +57,7 @@ function install_configs {
     echo "Source aliases"
     echo "source $HABITAT_PATH/base/aliases" >> ~/.zprezto/runcoms/zshrc
 
-    touch ~/.longh/.aptget.locks
+    touch ~/.longh/.configs.locks
 }
 
 
