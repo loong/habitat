@@ -5,7 +5,7 @@
 (package-initialize)
 
 (defvar my-packages
-  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-google-cpplint flymake-go expand-region dash company)
+  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-google-cpplint flymake-go expand-region dash company ensime)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
