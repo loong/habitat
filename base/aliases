@@ -70,6 +70,7 @@ fi
 # docker shortcuts
 alias dp='docker ps'
 alias dpa='docker ps -a'
+alias dcup='docker-compose up'
 alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
