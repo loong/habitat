@@ -76,10 +76,14 @@ alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
 
 # python shortcuts
-alias acti='virtualenv venv && source venv/bin/activate'
-alias act='source venv/bin/activate'
 alias pipr='pip install -r requirements.txt'
 alias pipi='pip install'
+alias 'pip i'='pip install'
+
+alias acti='python3 -m venv venv && source venv/bin/activate'
+alias act='source venv/bin/activate'
+alias dec='deactivate'
+
 
 ###########################################################################
 # Utilities
