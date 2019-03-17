@@ -36,8 +36,8 @@
 (ffap-bindings)
 
 ;; disable toolbar and menubar
-(tool-bar-mode -1)
-(menu-bar-mode -1)
+;; turn off toolbar
+(menu-bar-mode 0)
 
 ;; show which function currently
 (which-function-mode 1)

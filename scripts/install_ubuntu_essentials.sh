@@ -30,7 +30,7 @@ function install_pretzo {
     ln -s ~/.zprezto/runcoms/zshenv ~/.zshenv
     ln -s ~/.zprezto/runcoms/zshrc ~/.zshrc
 
-    chsh `which zsh`
+    chsh -s `which zsh`
 }
 
 function install_apt_gets {
@@ -41,7 +41,7 @@ function install_apt_gets {
     fi
 
     sudo apt-get update
-    sudo apt-get install -y git zsh emacs24-nox tmux htop silversearcher-ag trash-cli
+    sudo apt-get install -y git zsh emacs-nox tmux htop silversearcher-ag trash-cli tree
 
     mkdir -p ~/.longh
     touch ~/.longh/.aptget.locks
@@ -56,6 +56,9 @@ function install_configs {
 
     echo "Source aliases"
     echo "source $HABITAT_PATH/base/aliases" >> ~/.zprezto/runcoms/zshrc
+
+    mkdir -p ~/.emacs.d/
+    ln -s $HABITAT_PATH/bck/init.el ~/.emacs.d/init.el
 
     touch ~/.longh/.configs.locks
 }
