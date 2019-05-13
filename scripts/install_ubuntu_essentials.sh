@@ -41,7 +41,7 @@ function install_apt_gets {
     fi
 
     sudo apt-get update
-    sudo apt-get install -y git zsh emacs-nox tmux htop silversearcher-ag trash-cli tree
+    sudo apt-get install -y git zsh emacs-nox tmux htop silversearcher-ag trash-cli tree python3-dev
 
     mkdir -p ~/.longh
     touch ~/.longh/.aptget.locks
