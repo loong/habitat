@@ -57,8 +57,12 @@ function install_configs {
     echo "Source aliases"
     echo "source $HABITAT_PATH/base/aliases" >> ~/.zprezto/runcoms/zshrc
 
+    echo "Install init.el"
     mkdir -p ~/.emacs.d/
     ln -s $HABITAT_PATH/bck/init.el ~/.emacs.d/init.el
+
+    echo "Instal .tmux.conf"
+    ln -s $HABITAT_PATH/bck/tmux.conf ~/.tmux.conf
 
     touch ~/.longh/.configs.locks
 }
