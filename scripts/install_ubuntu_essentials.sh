@@ -41,7 +41,7 @@ function install_apt_gets {
     fi
 
     sudo apt-get update
-    sudo apt-get install -y git zsh emacs-nox tmux htop silversearcher-ag trash-cli tree
+    sudo apt-get install -y git zsh emacs-nox tmux htop silversearcher-ag trash-cli tree python3-dev
 
     mkdir -p ~/.longh
     touch ~/.longh/.aptget.locks
@@ -57,8 +57,12 @@ function install_configs {
     echo "Source aliases"
     echo "source $HABITAT_PATH/base/aliases" >> ~/.zprezto/runcoms/zshrc
 
+    echo "Install init.el"
     mkdir -p ~/.emacs.d/
     ln -s $HABITAT_PATH/bck/init.el ~/.emacs.d/init.el
+
+    echo "Instal .tmux.conf"
+    ln -s $HABITAT_PATH/bck/tmux.conf ~/.tmux.conf
 
     touch ~/.longh/.configs.locks
 }
