@@ -57,8 +57,9 @@ alias gd='git diff'
 
 alias gstore='git config credential.helper store'
 alias gmod="git ls-files --modified | xargs git add"
-alias gwip='git commit -m WIP'
 alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
+alias gwip='git commit -m WIP'
+alias glint='git commit -m "Fix linting errors"'
 
 # check if git name and email is set, if not set it to default
 if [[ ! $(git config --global user.email) ]]; then
@@ -168,4 +169,5 @@ elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
     alias subl='open -a "Sublime Text"'
     alias md='open -a MacDown'
     alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
+    alias cdev='open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
 fi
