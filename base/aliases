@@ -9,14 +9,6 @@
 ###########################################################################
 
 ###########################################################################
-# Workspaces
-###
-alias gows='cd ${GOPATH}/src/github.com'
-alias gomind='cd ${GOPATH}/src/github.com/mindworker'
-
-alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
-
-###########################################################################
 # Frequently used config files
 ###
 
@@ -78,6 +70,9 @@ alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
 
+# go shortcuts
+alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
+
 # python shortcuts
 alias pipr='pip install -r requirements.txt'
 alias pipi='pip install'
@@ -87,6 +82,43 @@ alias acti='python3 -m venv venv && source venv/bin/activate'
 alias act='source venv/bin/activate'
 alias dec='deactivate'
 
+###########################################################################
+# WebDev Utils
+###
+
+function curlj() {
+    curl "$@" | python -m json.tool
+}
+
+# Heroku
+alias hlogs='heroku logs'
+alias hpg='heroku pg:psql'
+alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups public-url`'
+
+###########################################################################
+# Platform specific
+###
+
+unamestr=`uname`
+
+# Linux
+if [[ "$unamestr" == 'Linux' ]]; then
+    alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
+
+    alias lightterm='~/habitat/base/themes/one-light'
+    alias matterm='~/habitat/base/themes/material'
+
+    alias rewifi='nmcli nm wifi off && nmcli nm wifi on'
+    alias dark='xset dpms force off' # black the screen
+
+# Mac OS X
+elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
+    alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
+    alias subl='open -a "Sublime Text"'
+    alias md='open -a MacDown'
+    alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
+    alias cdev='open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
+fi
 
 ###########################################################################
 # Utilities
@@ -94,7 +126,6 @@ alias dec='deactivate'
 
 alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v;'
 alias sudosweep='find . -name "*~" | xargs sudo rm -v; find . -name "*#" | xargs sudo rm -v;'
-alias dark='xset dpms force off' # black the screen
 
 function bck() { cp "$1" "$1.bck" ;}
 
@@ -134,40 +165,3 @@ function extract {
 function histo() {
     history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n15
 }
-
-###########################################################################
-# WebDev Utils
-###
-
-function curlj() {
-    curl "$@" | python -m json.tool
-}
-
-# Heroku
-alias hlogs='heroku logs'
-alias hpg='heroku pg:psql'
-alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups public-url`'
-
-###########################################################################
-# Platform specific
-###
-
-unamestr=`uname`
-
-# Linux
-if [[ "$unamestr" == 'Linux' ]]; then
-    alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
-
-    alias lightterm='~/habitat/base/themes/one-light'
-    alias matterm='~/habitat/base/themes/material'
-
-    alias rewifi='nmcli nm wifi off && nmcli nm wifi on'
-
-# Mac OS X
-elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
-    alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
-    alias subl='open -a "Sublime Text"'
-    alias md='open -a MacDown'
-    alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
-    alias cdev='open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
-fi
