@@ -56,6 +56,17 @@ alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 alias gwip='git commit -m WIP'
 alias glint='git commit -m "Fix linting errors"'
 
+function pr() {
+    id=$1
+    if [ -z $id ]; then
+	echo "Retrieve pull request"
+	echo "Usage: pr [issue number]"
+	return 1
+    fi
+    git fetch origin pull/${id}/head:pr_${id}
+    git checkout pr_${id}
+}
+
 # check if git name and email is set, if not set it to default
 if [[ ! $(git config --global user.email) ]]; then
     echo "Git name and email conf not set, set them automatically"
