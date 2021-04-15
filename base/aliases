@@ -45,6 +45,8 @@ alias gs='git status'
 alias gc='git commit -m'
 alias gp='git push'
 alias gpom='git push origin master'
+alias gco='git checkout'
+alias gb='git branch'
 alias g.='git add .'
 alias gd='git diff'
 
