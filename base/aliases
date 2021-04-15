@@ -43,7 +43,8 @@ alias cp='cp -i'     # interactive cp by default (prevents unconcious overriding
 # git shortcuts
 alias gs='git status'
 alias gc='git commit -m'
-alias gp='git push' 
+alias gp='git push'
+alias gpom='git push origin master'
 alias g.='git add .'
 alias gd='git diff'
 
@@ -101,7 +102,7 @@ alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups pu
 # Platform specific
 ###
 
-unamestr=`uname`
+set unamestr=`uname`
 
 # Linux
 if [[ "$unamestr" == 'Linux' ]]; then
