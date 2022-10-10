@@ -4,7 +4,7 @@
 (package-initialize)
 
 (defvar my-packages
-  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-google-cpplint flymake-go expand-region dash company py-autopep8 jedi pylint)
+  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-go expand-region dash company py-autopep8 jedi pylint)
   "A list of packages to ensure are installed at launch.")
 
 (defun my-packages-installed-p ()
@@ -140,11 +140,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default))
  '(package-selected-packages
-   (quote
-    (expand-region flymake-go flymake-google-cpplint go-autocomplete go-mode golint web-mode yasnippet-snippets markdown-mode sass-mode rainbow-mode solarized-theme volatile-highlights yaml-mode zenburn-theme tide))))
+   '(typescript-mode expand-region flymake-go flymake-google-cpplint go-autocomplete go-mode golint web-mode yasnippet-snippets markdown-mode sass-mode rainbow-mode solarized-theme volatile-highlights yaml-mode zenburn-theme tide)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
