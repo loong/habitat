@@ -111,6 +111,9 @@ alias hlogs='heroku logs'
 alias hpg='heroku pg:psql'
 alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups public-url`'
 
+alias supa="supa-admin-cli"
+alias supadev="/Users/longh/go/bin/cli"
+
 ###########################################################################
 # Platform specific
 ###
