@@ -131,7 +131,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
     alias dark='xset dpms force off' # black the screen
 
 # Mac OS X
-elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
+elif [[ "$(uname)" == 'Darwin' ]]; then
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
     alias subl='open -a "Sublime Text"'
     alias md='open -a MacDown'
