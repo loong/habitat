@@ -2,7 +2,7 @@
 
 ###########################################################################
 #
-#   @autor Long Hoang <long@mindworker.de>
+#   @autor Long Hoang
 # 
 #   @brief general useful aliases
 #
@@ -70,7 +70,7 @@ function pr() {
 # check if git name and email is set, if not set it to default
 if [[ ! $(git config --global user.email) ]]; then
     echo "Git name and email conf not set, set them automatically"
-    git config --global user.email "long@mindworker.de"
+    git config --global user.email "1732217+loong@users.noreply.github.com"
     git config --global user.name "Long Hoang"
     git config --global core.editor "emacs -nw"
 fi
