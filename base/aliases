@@ -141,7 +141,7 @@ fi
 # Utilities
 ###
 
-alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v;'
+alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v; find . -name ".#*" | xargs rm -v;'
 alias sudosweep='find . -name "*~" | xargs sudo rm -v; find . -name "*#" | xargs sudo rm -v;'
 
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
