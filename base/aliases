@@ -73,6 +73,7 @@ if [[ ! $(git config --global user.email) ]]; then
     git config --global user.email "1732217+loong@users.noreply.github.com"
     git config --global user.name "Long Hoang"
     git config --global core.editor "emacs -nw"
+    git config --global init.defaultBranch main
 fi
 
 # docker shortcuts
