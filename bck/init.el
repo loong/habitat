@@ -194,10 +194,6 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-;; (add-hook 'before-save-hook 'tide-format-before-save)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-
 ;; Aliases
 (defalias 'g 'goto-line)
 (defalias 'wm 'web-mode)
@@ -208,20 +204,3 @@
       "Change the current buffer to Latin 1 with Unix line-ends."
       (interactive)
       (set-buffer-file-coding-system 'iso-latin-1-unix t))
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default))
- '(package-selected-packages
-   '(typescript-mode expand-region flymake-go flymake-google-cpplint go-autocomplete go-mode golint web-mode yasnippet-snippets markdown-mode sass-mode rainbow-mode solarized-theme volatile-highlights yaml-mode zenburn-theme tide)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
