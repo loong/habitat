@@ -1,24 +1,98 @@
-(require 'cl-lib)
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(defvar my-packages
-  '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-go expand-region dash company py-autopep8 jedi pylint)
-  "A list of packages to ensure are installed at launch.")
+(straight-use-package 'use-package)
+(require 'use-package)
 
-(defun my-packages-installed-p ()
-  (cl-loop for p in my-packages
-           when (not (package-installed-p p)) do (cl-return nil)
-           finally (cl-return t)))
+(use-package tree-sitter
+	     :straight (tree-sitter :type git
+				    :host github
+				    :repo "ubolonton/emacs-tree-sitter"
+				    :files ("lisp/*.el"))
+	     :config (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
+	     :hook ((python-mode rustic-mode) . tree-sitter-hl-mode))
 
-(unless (my-packages-installed-p)
-  ;; check for new packages (package versions)
-  (package-refresh-contents)
-  ;; install the missing packages
-  (dolist (p my-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
+(use-package tree-sitter-langs
+	     :straight (tree-sitter-langs :type git
+					  :host github
+					  :repo "ubolonton/emacs-tree-sitter"
+					  :files ("langs/*.el" "langs/queries"))
+	     :after tree-sitter)
+
+(use-package typescript-mode
+	     :after tree-sitter
+	     :config
+	     ;; we choose this instead of tsx-mode so that eglot can automatically figure out language for server
+	     ;; see https://github.com/joaotavora/eglot/issues/624 and https://github.com/joaotavora/eglot#handling-quirky-servers
+	     (define-derived-mode typescriptreact-mode typescript-mode
+	       "TypeScript TSX")
+
+	     ;; use our derived mode for tsx files
+	     (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
+	     ;; by default, typescript-mode is mapped to the treesitter typescript parser
+	     ;; use our derived mode to map both .tsx AND .ts -> typescriptreact-mode -> treesitter tsx
+	     (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
+
+(use-package tsi
+	     :after tree-sitter
+	     ;; define autoload definitions which when actually invoked will cause package to be loaded
+	     :commands (tsi-typescript-mode tsi-json-mode tsi-css-mode)
+	     :init
+	     (add-hook 'typescript-mode-hook (lambda () (tsi-typescript-mode 1)))
+	     (add-hook 'json-mode-hook (lambda () (tsi-json-mode 1)))
+	     (add-hook 'css-mode-hook (lambda () (tsi-css-mode 1)))
+	     (add-hook 'scss-mode-hook (lambda () (tsi-scss-mode 1))))
+
+(use-package apheleia
+  :straight (apheleia :host github :repo "radian-software/apheleia")
+  :config
+  (setf (alist-get 'prettier apheleia-formatters)
+        '(npx "prettier"
+              "--trailing-comma"  "es5"
+              "--bracket-spacing" "true"
+              "--single-quote"    "true"
+              "--semi"            "false"
+              "--print-width"     "100"
+              file))
+  (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier))
+  (apheleia-global-mode t))
+
+(straight-use-package 'go-mode)
+(straight-use-package 'go-autocomplete)
+(straight-use-package 'golint)
+(straight-use-package 'flymake-go)
+(straight-use-package 'web-mode)
+(straight-use-package 'markdown-mode)
+(straight-use-package 'py-autopep8)
+(straight-use-package 'jedi)
+(straight-use-package 'pylint)
+
+;; (defvar my-packages
+;;   '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-go expand-region dash company py-autopep8 jedi pylint )
+;;   "A list of packages to ensure are installed at launch.")
+
+;; (defun my-packages-installed-p ()
+;;   (cl-loop for p in my-packages
+;;            when (not (package-installed-p p)) do (cl-return nil)
+;;            finally (cl-return t)))
+
+;; (unless (my-packages-installed-p)
+;;   ;; check for new packages (package versions)
+;;   (package-refresh-contents)
+;;   ;; install the missing packages
+;;   (dolist (p my-packages)
+;;     (when (not (package-installed-p p))
+;;       (package-install p))))
 
 ;; for bashrc aliases
 (setq shell-file-name "zsh")
@@ -107,6 +181,8 @@
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 (setq-default typescript-indent-level 2)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+
 
 ;; Python
 (add-hook 'python-mode-hook 'jedi:setup)
