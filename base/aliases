@@ -84,6 +84,7 @@ alias dcdown='docker-compose down'
 alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
+alias drmall='docker ps -aq | xargs docker stop | xargs docker rm'
 
 # go shortcuts
 alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
