@@ -67,6 +67,9 @@
   (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier))
   (apheleia-global-mode t))
 
+(straight-use-package 'sql)
+(straight-use-package 'sql-indent)
+
 (straight-use-package 'go-mode)
 (straight-use-package 'go-autocomplete)
 (straight-use-package 'golint)
