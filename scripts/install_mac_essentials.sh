@@ -65,7 +65,8 @@ function install_configs {
 
     echo "Install init.el"
     mkdir -p ~/.emacs.d/
-    ln -s $HABITAT_PATH/bck/init.el ~/.emacs.d/init.el
+    ln -s $HABITAT_PATH/bck/emacs.d/init.el ~/.emacs.d/init.el
+    ln -s $HABITAT_PATH/bck/emacs.d/themes ~/.emacs.d/themes
 
     echo "Instal .tmux.conf"
     ln -s $HABITAT_PATH/bck/tmux.conf ~/.tmux.conf

@@ -87,6 +87,10 @@
 (straight-use-package 'jedi)
 (straight-use-package 'pylint)
 
+;; theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'melancholy t)
+
 ;; (defvar my-packages
 ;;   '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-go expand-region dash company py-autopep8 jedi pylint )
 ;;   "A list of packages to ensure are installed at launch.")
