@@ -14,6 +14,7 @@
 (straight-use-package 'use-package)
 (require 'use-package)
 
+;; https://vxlabs.com/2022/06/12/typescript-development-with-emacs-tree-sitter-and-lsp-in-2022/
 (use-package tree-sitter
 	     :straight (tree-sitter :type git
 				    :host github
@@ -66,6 +67,12 @@
               file))
   (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier))
   (apheleia-global-mode t))
+
+;; https://sagot.dev/en/articles/emacs-typescript/
+(straight-use-package 'lsp-mode)
+(require 'lsp-mode)
+(add-hook 'typescript-mode-hook 'lsp-deferred)
+(add-hook 'javascript-mode-hook 'lsp-deferred)
 
 (straight-use-package 'sql)
 (straight-use-package 'sql-indent)
