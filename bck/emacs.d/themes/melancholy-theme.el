@@ -63,7 +63,7 @@
      (my-contrast           "#666666" )
      (my-deepcontrast       "#444444" )
      (my-hicontrast         "#DEDEDE" )
-     (my-shadow             "#333333" )
+     (my-shadow             "#000000" ) ;; LH modified
      (my-pop                "#00B7FF" )
      (my-warning            "#FF6969" )
      ;;  (my-btw                "#8B4538" )
