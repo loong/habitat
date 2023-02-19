@@ -1,11 +1,22 @@
+;; Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
+;; The default is 800 kilobytes. Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s seconds with %d garbage collections."
+                     (emacs-init-time "%.2f")
+                     gcs-done)))
+
+;; Install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
+      (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
@@ -43,6 +54,7 @@
 	     ;; by default, typescript-mode is mapped to the treesitter typescript parser
 	     ;; use our derived mode to map both .tsx AND .ts -> typescriptreact-mode -> treesitter tsx
 	     (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
+(setq-default typescript-indent-level 2)
 
 (use-package tsi
 	     :after tree-sitter
@@ -70,7 +82,10 @@
 
 ;; https://sagot.dev/en/articles/emacs-typescript/
 (straight-use-package 'lsp-mode)
+(straight-use-package 'lsp-ui)
 (require 'lsp-mode)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-ui-sideline-enable nil)
 (add-hook 'typescript-mode-hook 'lsp-deferred)
 (add-hook 'javascript-mode-hook 'lsp-deferred)
 
@@ -89,29 +104,43 @@
 
 ;; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'melancholy t)
+;; (load-theme 'melancholy t)
 
 (straight-use-package 'rainbow-mode)
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
   (lambda () (rainbow-mode 1)))
 (my-global-rainbow-mode 1)
 
-;; (defvar my-packages
-;;   '(tide zenburn-theme yaml-mode volatile-highlights solarized-theme rainbow-mode sass-mode markdown-mode yasnippet-snippets web-mode s golint go-mode go-autocomplete flymake-go expand-region dash company py-autopep8 jedi pylint )
-;;   "A list of packages to ensure are installed at launch.")
+;; list recent file
+(recentf-mode 1)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
-;; (defun my-packages-installed-p ()
-;;   (cl-loop for p in my-packages
-;;            when (not (package-installed-p p)) do (cl-return nil)
-;;            finally (cl-return t)))
+;; comment or uncomment shortcut
+(global-set-key (kbd "C-x C-/") 'comment-or-uncomment-region)
 
-;; (unless (my-packages-installed-p)
-;;   ;; check for new packages (package versions)
-;;   (package-refresh-contents)
-;;   ;; install the missing packages
-;;   (dolist (p my-packages)
-;;     (when (not (package-installed-p p))
-;;       (package-install p))))
+;; enable history of minibuffer
+(setq history-length 25)
+(savehist-mode 1)
+
+;; shows available key bindings
+(straight-use-package 'which-key)
+(setq which-key-idle-delay 2)
+(which-key-mode 1)
+
+;; Remember last cursor location
+(save-place-mode 1)
+
+;; Delete selection before insert
+(delete-selection-mode t)
+
+;; improve scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+(straight-use-package 'which-key)
+(company-mode 1)
 
 ;; for bashrc aliases
 (setq shell-file-name "zsh")
@@ -143,28 +172,28 @@
 (add-hook 'emacs-startup-hook '2-windows-vertical-to-horizontal)
 
 ;; yasnippet
-(require 'yasnippet)
-(yas-global-mode 1)
+;; (require 'yasnippet)
+;; (yas-global-mode 1)
 
 ;; web mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;; (require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
-(defun my-web-mode-hook ()
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-(add-hook 'web-mode-hook 'my-web-mode-hook)
+;; (defun my-web-mode-hook ()
+;;   (setq web-mode-markup-indent-offset 2)
+;;   (setq web-mode-code-indent-offset 2)
+;;   (setq web-mode-code-indent-offset 2))
+;; (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; golang!
@@ -186,22 +215,6 @@
   ; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump))
 (add-hook 'go-mode-hook 'my-go-mode-hook)
-
-;; Typescript
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
-(setq-default typescript-indent-level 2)
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
-
 
 ;; Python
 (add-hook 'python-mode-hook 'jedi:setup)
