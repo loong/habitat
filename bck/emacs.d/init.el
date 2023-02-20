@@ -97,15 +97,13 @@
 
 ;; Deno
 ;; ----------------------------------------------------------------------
-;; Workaround by piggy backing js-mode
+;; To disable do M-x lsp-disconnect + C-u M-x lsp <Enter> ts-ls
 (use-package typescript-mode
   :ensure t
   :hook (typescript-mode . (lambda ()
 			     (setq lsp-disabled-clients '(ts-ls))
 			     (lsp-deferred))))
-(add-hook 'js-mode-hook (lambda ()
-			  (setq lsp-disabled-clients '())
-			  (lsp-deferred)))
+
 ;; auto-complete
 (use-package company
   :ensure t
