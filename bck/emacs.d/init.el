@@ -76,7 +76,11 @@
 (use-package sql :ensure t)
 (use-package sql-indent :ensure t)
 (use-package web-mode :ensure t)
-(use-package markdown-mode :ensure t)
+(use-package markdown-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.mdx?\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md?\\'" . markdown-mode)))
 
 ;; Typescript
 ;; ----------------------------------------------------------------------
@@ -115,15 +119,19 @@
 ;; https://github.com/radian-software/apheleia
 (use-package apheleia
   :ensure t
-  :config  (setf (alist-get 'prettier apheleia-formatters)
-		 '(npx "prettier"
-		       "--trailing-comma"  "es5"
-		       "--bracket-spacing" "true"
-		       "--single-quote"    "true"
-		       "--semi"            "false"
-		       "--print-width"     "100"
-		       file))
-  (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier))
+  :config
+  (setf (alist-get 'prettier-ts apheleia-formatters)
+	'(npx "prettier"
+	      "--trailing-comma"  "es5"
+	      "--bracket-spacing" "true"
+	      "--single-quote"    "true"
+	      "--semi"            "false"
+	      "--print-width"     "100"
+	      file))
+  (setf (alist-get 'prettier-md apheleia-formatters)
+	'(npx "prettier" file))
+  (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier-ts))
+  (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-md))
   (apheleia-global-mode +1))
 
 ;; Utils
