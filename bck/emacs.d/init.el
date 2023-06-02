@@ -27,6 +27,9 @@
     (eval-buffer)
     (quelpa-self-upgrade)))
 
+;; prevents quelpa updating on init
+(setq quelpa-update-melpa-p nil)
+
 (quelpa
  '(quelpa-use-package
    :fetcher git
