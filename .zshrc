@@ -38,7 +38,6 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../../'
 
-alias j='jobs -l'
 alias em='emacs -nw'
 alias sem='sudo emacs -nw'
 alias v='vim -O'
@@ -142,6 +141,10 @@ if [[ "$unamestr" == 'Linux' ]]; then
 
 # Mac OS X
 elif [[ "$(uname)" == 'Darwin' ]]; then
+    # autojump
+    [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+    # aliases
     alias timestamp='date +%s | pbcopy; echo "Timestamp copied to clipboard"; date +%s;'
     alias subl='open -a "Sublime Text"'
     alias md='open -a MacDown'
@@ -152,6 +155,8 @@ fi
 ###########################################################################
 # Utilities
 ###
+
+source ~/.config/private/supa-aliases 
 
 alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v; find . -name ".#*" | xargs rm -v;'
 alias sudosweep='find . -name "*~" | xargs sudo rm -v; find . -name "*#" | xargs sudo rm -v;'
