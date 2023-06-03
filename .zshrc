@@ -117,6 +117,8 @@ alias dec='deactivate'
 # WebDev Utils
 ###
 
+alias http='httpie'
+
 alias nmod_sizes='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 
 function curlj() {
