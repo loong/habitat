@@ -50,6 +50,10 @@ alias ls='exa'
 alias ll='exa -l'
 alias f='fzf --preview "bat --color \"always\" {}"'
 
+# default suffix aliases
+alias -s {js,ts,tsx,json,env,mdx,html,css,toml}='emacs -nw'
+alias -s git="git clone"
+
 # this one saved by butt so many times
 alias wget='wget -c' # resumes downloads by default
 alias cp='cp -i'     # interactive cp by default (prevents unconcious overriding)
