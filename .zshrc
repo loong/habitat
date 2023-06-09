@@ -31,6 +31,16 @@ alias emagic='emacs -nw ~/.emacs.d/init.el'
 alias hmagic='emacs -nw /etc/hosts'
 
 ###########################################################################
+# Defaults
+###
+
+export EDITOR='emacs'
+
+# default suffix aliases
+alias -s {js,ts,tsx,json,env,mdx,html,css,toml}='emacs -nw'
+alias -s git="git clone"
+
+###########################################################################
 # Very handy tweaks
 ###
 
@@ -49,10 +59,6 @@ alias cat='bat'
 alias ls='exa'
 alias ll='exa -l'
 alias f='fzf --preview "bat --color \"always\" {}"'
-
-# default suffix aliases
-alias -s {js,ts,tsx,json,env,mdx,html,css,toml}='emacs -nw'
-alias -s git="git clone"
 
 # this one saved by butt so many times
 alias wget='wget -c' # resumes downloads by default
@@ -114,14 +120,12 @@ alias pipi='pip install'
 alias 'pip i'='pip install'
 
 alias acti='python3 -m venv venv && source venv/bin/activate'
-alias act='source venv/bin/activate'
+# alias act='source venv/bin/activate'
 alias dec='deactivate'
 
 ###########################################################################
 # WebDev Utils
 ###
-
-alias http='httpie'
 
 alias nmod_sizes='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 
@@ -167,7 +171,7 @@ fi
 # Utilities
 ###
 
-source ~/.config/private/supa-aliases 
+source ~/.config/private/aliases 
 
 alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v; find . -name ".#*" | xargs rm -v;'
 alias sudosweep='find . -name "*~" | xargs sudo rm -v; find . -name "*#" | xargs sudo rm -v;'
