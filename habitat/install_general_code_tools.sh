@@ -9,5 +9,10 @@ if [[ "$unamestr" == 'Linux' ]]; then
     
 # Mac OS X
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
-    brew install tmux the_silver_searcher trash glances git autojump bat exa httpie
+    if ! command -v brew &> /dev/null
+    then
+	echo "Homebrew not found, installing..."
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    brew install tmux the_silver_searcher trash glances git autojump bat exa httpie tmuxinator
 fi
