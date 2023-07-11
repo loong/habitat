@@ -81,6 +81,7 @@ alias gmod="git ls-files --modified | xargs git add"
 alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 alias gwip='git commit -m WIP'
 alias glint='git commit -m "Fix linting errors"'
+alias oldbranch='git branch --sort=-committerdate | sed -E "/main|master|dev|develop/d" | tail -n +3'
 
 function pr() {
     id=$1

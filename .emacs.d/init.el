@@ -105,11 +105,10 @@
 
 ;; Deno
 ;; ----------------------------------------------------------------------
-;; To disable do M-x lsp-disconnect + C-u M-x lsp <Enter> ts-ls
+;; To disable deno do M-x lsp-disconnect + C-u M-x lsp <Enter> ts-ls
 (use-package typescript-mode
   :ensure t
   :hook (typescript-mode . (lambda ()
-			     (setq lsp-disabled-clients '(ts-ls))
 			     (lsp-deferred))))
 
 ;; auto-complete
@@ -137,6 +136,38 @@
   (add-to-list 'apheleia-mode-alist '(typescript-mode . prettier-ts))
   (add-to-list 'apheleia-mode-alist '(markdown-mode . prettier-md))
   (apheleia-global-mode +1))
+
+;; Ivy & Projectile
+;; ----------------------------------------------------------------------
+
+(use-package ivy
+  :ensure t
+  :config (ivy-mode 1))
+
+;; (use-package swiper
+;;   :ensure t
+;;   :bind (("C-s" . swiper)))
+
+;; (use-package counsel
+;;   :ensure t
+;;   :bind (("M-x" . counsel-M-x)
+;;          ("C-x b" . counsel-ibuffer)
+;;          ("C-x C-f" . counsel-find-file)
+;;          :map minibuffer-local-map
+;;          ("C-r" . 'counsel-minibuffer-history)))
+
+;; (use-package projectile
+;;   :ensure t
+;;   :config (projectile-mode)
+;;   :bind-keymap ("C-c p" . projectile-command-map)
+;;   :init)
+
+;; (use-package ivy-rich
+;;   :ensure t
+;;   :after counsel
+;;   :init
+;;   (ivy-rich-mode 1))
+
 
 ;; Utils
 ;; ----------------------------------------------------------------------
