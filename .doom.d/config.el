@@ -78,3 +78,15 @@
 
 ;; do not ask for confirmation when closing emacs
 (setq confirm-kill-emacs nil)
+
+;; enable auto-save
+(setq auto-save-default t
+      make-backup-files t)
+
+;; handy mappings
+(map! "M-g g" #'avy-goto-line)
+(map! "M-g M-g" #'avy-goto-line)
+(map! "C-x /" #'comment-or-uncomment-region)
+
+;; use prettier for typescript
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
