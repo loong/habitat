@@ -27,7 +27,7 @@ alias magic='emacs -nw ~/.zshrc'
 alias imagic='emacs -nw ~/.config/i3/config'
 alias smagic='emacs -nw ~/.i3status.conf'
 alias tmagic='emacs -nw ~/.tmux.conf'
-alias emagic='emacs -nw ~/.emacs.d/init.el'
+alias emagic='emacs -nw ~/.doom.d/init.el'
 alias hmagic='emacs -nw /etc/hosts'
 
 ###########################################################################
@@ -50,6 +50,8 @@ alias ...='cd ../../../'
 
 alias em='emacs -nw'
 alias sem='sudo emacs -nw'
+alias doom='~/.emacs.d/bin/doom'
+
 alias v='vim -O'
 alias chmox='chmod +x'
 alias schmox='sudo chmod +x'
@@ -115,6 +117,8 @@ alias drmall='docker ps -aq | xargs docker stop | xargs docker rm'
 
 # go shortcuts
 alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
+export GOPATH="/Users/longh/go"
+export PATH="$GOPATH/bin:$PATH"
 
 # python shortcuts
 alias pipr='pip install -r requirements.txt'
@@ -129,6 +133,10 @@ alias dec='deactivate'
 # WebDev Utils
 ###
 
+# fnm
+eval "$(fnm env --use-on-cd)"
+
+# npm
 alias nmod_sizes='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 
 function curlj() {
@@ -167,6 +175,8 @@ elif [[ "$(uname)" == 'Darwin' ]]; then
     alias md='open -a MacDown'
     alias sweepds='find . -name "*.DS_Store" | xargs rm -v'
     alias cdev='open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
+
+    alias supaloco='open http://localhost:54323/project/default/sql/1'
 fi
 
 ###########################################################################
