@@ -1,12 +1,28 @@
-#!/bin/zsh
+# from https://wmanger.com/articles/go-on-doom-emacs/
+export GOPATH=~/go
 
-go get -u golang.org/x/tools/cmd/goimports
-go get -u github.com/nsf/gocode
-go get -u github.com/rogpeppe/godef
-go get -u github.com/golang/lint/golint
-go get -u github.com/dougm/goflymake
-go get -u gopkg.in/alecthomas/gometalinter
-go get -u golang.org/x/tools/cmd/gorename
-go get github.com/GeertJohan/fgt
-go get -u github.com/client9/misspell/cmd/misspell
-go get -u github.com/telecoda/tt
+# REPL!
+go install github.com/x-motemen/gore/cmd/gore@latest
+
+# Autocompletion
+go install github.com/stamblerre/gocode@latest
+
+# Documentation
+go install golang.org/x/tools/cmd/godoc@latest
+
+# Add/Removed Necessary Imports
+go install golang.org/x/tools/cmd/goimports@latest
+
+# Type-Safe Renaming of Go identifiers
+go install golang.org/x/tools/cmd/gorename@latest
+
+# Asks questions about your Gocode
+go install golang.org/x/tools/cmd/guru@latest
+
+# Generate tests based off of the func you're on
+go install github.com/cweill/gotests/gotests@latest
+
+# Add `json` or `bson` to structs easily
+go install github.com/fatih/gomodifytags@latest
+
+go install honnef.co/go/tools/cmd/staticcheck@latest
