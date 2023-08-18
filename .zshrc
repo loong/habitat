@@ -8,6 +8,8 @@
 # Habitat
 ###
 
+SHELL=zsh
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -131,13 +133,6 @@ alias dec='deactivate'
 ###########################################################################
 # WebDev Utils
 ###
-
-# fnm, install if not there
-if ! which fnm > /dev/null; then
-   echo "fnm not found! Installing..."
-   curl -fsSL https://fnm.vercel.app/install | zsh
-fi
-eval "$(fnm env --use-on-cd)"
 
 # npm
 alias nmod_sizes='find . -name "node_modules" -type d -prune -print | xargs du -chs'
