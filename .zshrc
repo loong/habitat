@@ -155,8 +155,6 @@ alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups pu
 # Platform specific
 ###
 
-set unamestr=`uname`
-
 # Linux
 if [[ $(uname -s) == "Linux" ]]; then
     [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
