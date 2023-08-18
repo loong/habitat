@@ -58,7 +58,6 @@ alias schmox='sudo chmod +x'
 alias df='df -h'
 
 alias cat='bat'
-alias ls='exa'
 alias ll='exa -l'
 alias f='fzf --preview "bat --color \"always\" {}"'
 
