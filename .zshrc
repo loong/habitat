@@ -132,7 +132,11 @@ alias dec='deactivate'
 # WebDev Utils
 ###
 
-# fnm
+# fnm, install if not there
+if ! which fnm > /dev/null; then
+   echo "fnm not found! Installing..."
+   curl -fsSL https://fnm.vercel.app/install | zsh
+fi
 eval "$(fnm env --use-on-cd)"
 
 # npm
