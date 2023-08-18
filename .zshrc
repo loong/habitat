@@ -158,7 +158,9 @@ alias hdump='heroku pg:backups capture;curl -o latest.dump `heroku pg:backups pu
 set unamestr=`uname`
 
 # Linux
-if [[ "$unamestr" == 'Linux' ]]; then
+if [[ $(uname -s) == "Linux" ]]; then
+    [ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
+
     alias nauti='nautilus --no-desktop > /dev/null 2>&1 &'
 
     alias lightterm='~/habitat/base/themes/one-light'
@@ -180,13 +182,19 @@ elif [[ "$(uname)" == 'Darwin' ]]; then
     alias cdev='open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
 
     alias supaloco='open http://localhost:54323/project/default/sql/1'
+else
+    echo "Can't determine which operating system is running"
 fi
 
 ###########################################################################
 # Utilities
 ###
 
-source ~/.config/private/aliases 
+if [[ -f ~/.config/private/aliases   ]]; then
+    source ~/.config/private/aliases
+else
+    echo "Private aliases not loaded."
+fi
 
 alias sweep='find . -name "*~" | xargs rm -v; find . -name "*#" | xargs rm -v; find . -name ".#*" | xargs rm -v;'
 alias sudosweep='find . -name "*~" | xargs sudo rm -v; find . -name "*#" | xargs sudo rm -v;'
