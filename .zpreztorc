@@ -135,7 +135,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 if [[ "$(uname)" == 'Darwin' ]]; then
    zstyle ':prezto:module:prompt' theme 'sorin'
 else 
-   zstyle ':prezto:module:prompt' theme 'walters'
+   zstyle ':prezto:module:prompt' theme 'nicoulaj'
 fi
 
 # Set the working directory prompt display length.
