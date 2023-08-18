@@ -10,8 +10,12 @@ if [ "$current_user" != "longh" ]; then
     sudo passwd longh
 fi
 
+DIR=/home/longh/
+
 sudo su longh -c " \
-    alias h='/usr/bin/git --git-dir=$HOME/.habitat/ --work-tree=$HOME'; \
-    git clone --bare https://github.com/loong/habitat $HOME/.habitat; \
-    h checkout; \
-    h config --local status.showUntrackedFiles no;"
+    cd $DIR; \
+    /usr/bin/git --git-dir=$DIR/.habitat/ --work-tree=$DIR clone --bare https://github.com/loong/habitat $DIR/.habitat; \
+    /usr/bin/git --git-dir=$DIR/.habitat/ --work-tree=$DIR checkout; \
+    /usr/bin/git --git-dir=$DIR/.habitat/ --work-tree=$DIR config --local status.showUntrackedFiles no;"
+
+sudo su longh
