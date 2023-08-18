@@ -90,3 +90,6 @@
 
 ;; use prettier for typescript
 (setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+
+;; e.g. c-c w u to undo c-x 1
+(winner-mode 1)
