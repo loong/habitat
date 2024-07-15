@@ -137,6 +137,9 @@ alias dec='deactivate'
 # npm
 alias nmod_sizes='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 
+# fnm
+eval "$(fnm env)"
+
 function curlj() {
     curl "$@" | python -m json.tool
 }
