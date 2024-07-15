@@ -76,8 +76,8 @@ alias gpom='git push origin master'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gb='git branch --sort=-committerdate'
-alias g.='git add .'
 alias gd='git diff'
+alias gap='git add -p .'
 
 alias gstore='git config credential.helper store'
 alias gmod="git ls-files --modified | xargs git add"
