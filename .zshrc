@@ -63,6 +63,9 @@ alias cat='bat'
 alias ll='exa -l'
 alias f='fzf --preview "bat --color \"always\" {}"'
 
+alias fmt='(cd $(git rev-parse --show-toplevel) && (git diff --name-only --diff-filter=d; git diff --cached --name-only --diff-filter=d; git ls-files --others --exclude-standard) | sort -u | xargs prettier --write --ignore-unknown)'
+
+
 # this one saved by butt so many times
 alias wget='wget -c' # resumes downloads by default
 alias cp='cp -i'     # interactive cp by default (prevents unconcious overriding)
@@ -85,6 +88,10 @@ alias gfix='git commit --fixup HEAD && git rebase -i --autosquash --autostash'
 alias gwip='git commit -m WIP'
 alias glint='git commit -m "Fix linting errors"'
 alias oldbranch='git branch --sort=-committerdate | sed -E "/main|master|dev|develop/d" | tail -n +3'
+
+alias stash='git stash'
+alias apply='git stash apply'
+alias one='git log --oneline'
 
 function pr() {
     id=$1
@@ -115,6 +122,10 @@ alias dstatus='docker-compose exec dev supervisorctl status'
 alias dlog='docker-compose logs dev'
 alias dstopall='docker stop $(docker ps -aq)'
 alias drmall='docker ps -aq | xargs docker stop | xargs docker rm'
+
+# supa
+alias supa='npx supabase'
+alias supares='npx supabase db reset'
 
 # go shortcuts
 alias gotest="reflex -r '\.go$' -d fancy -- sh -c 'echo \"CHANGE DETECTED. RUN TEST:\"; go test ./...; echo \"DONE\n\"'"
@@ -234,4 +245,35 @@ function extract {
 
 function histo() {
     history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n15
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/longh/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/longh/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/longh/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/longh/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="$HOME/.local/bin:$PATH"
+
+# bun completions
+[ -s "/Users/longh/.bun/_bun" ] && source "/Users/longh/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# Martini primary workspace for Conductor
+export MARTINI_PRIMARY_WORKSPACE="/Users/longh/space/c47/martini"
+export TERM=xterm-256color
+
+###########################################################################
+# Low disk space warning (Spotlight index breaks when the disk runs full)
+###
+
+() {
+    local free_gb
+    free_gb=$(command df -g /System/Volumes/Data 2>/dev/null | awk 'NR==2 {print $4}')
+    if [[ -n "$free_gb" && "$free_gb" -lt 150 ]]; then
+        print -P "%F{yellow}⚠ Low disk: ${free_gb}GB free (<150GB) — archive Conductor workspaces / docker system prune -a%f"
+    fi
 }
